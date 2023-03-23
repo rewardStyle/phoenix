@@ -1,0 +1,22 @@
+repos:
+
+- repo: local
+  hooks:
+  - id: pip-compile requirements.txt
+    name: compile requirements.txt
+    entry: pip-compile
+    language: system
+    always_run: false
+    files: setup.py
+    args: [--no-emit-index-url]
+    stages: [push]
+    pass_filenames: false
+  - id: pip-compile requirements-dev.txt
+    name: compile requirements-dev.txt
+    entry: pip-compile requirements-dev.in
+    language: system
+    always_run: false
+    files: requirements-dev.in
+    args: [--no-emit-index-url]
+    stages: [push]
+    pass_filenames: false
